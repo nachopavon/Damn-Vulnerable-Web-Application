@@ -12,7 +12,7 @@ stages {
     steps {
         withSonarQubeEnv('sonarqube') {
             sh "${scannerHome}/bin/sonar-scanner \
-                 -Dsonar.login="dmin \
+                 -Dsonar.login=admin \
                  -Dsonar.password=adminadmin"
         }
         timeout(time: 10, unit: 'MINUTES') {
