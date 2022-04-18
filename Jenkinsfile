@@ -5,21 +5,17 @@ pipeline {
     }
 
 stages {
-    stage ("SonarQube Scan") {
-       steps {
-          withEnv(["PATH=/usr/bin:/usr/local/jdk-11.0.2/bin:/opt/sonarqube/sonar-scanner/bin/"]) {
-             withSonarQubeEnv(installationName: 'sonarqube') { 
-               sh "sonar-scanner \
-                 -Dsonar.projectKey=${projectName} \
-                 -Dsonar.sources=. \
-                 -Dsonar.host.url=${env.SONAR_HOST_URL} \
-                 -Dsonar.login=admin \
-                 -Dsonar.password=adminadmin \
-                 -Dsonar.projectName=${projectName} \
-                 -Dsonar.projectVersion=${env.BUILD_ID}"
-           }
-         }
-       }
-     }
-  }
+    stage('Sonarqube') {
+    environment {
+        scannerHome = tool 'sonarqube'
+    }
+    steps {
+        withSonarQubeEnv('sonarqube') {
+            sh "${scannerHome}/bin/sonar-scanner"
+        }
+        timeout(time: 10, unit: 'MINUTES') {
+            waitForQualityGate abortPipeline: true
+            }
+        }
+    }
 }
