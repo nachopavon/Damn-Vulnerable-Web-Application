@@ -2,9 +2,7 @@ def scan_type
  def target
 pipeline {
     agent any
-    environment {
-        projectName = "dvwa"
-        parameters {
+         parameters {
          choice  choices: ["Baseline", "APIS", "Full"],
                  description: 'Type of scan that is going to perform inside the container',
                  name: 'SCAN_TYPE'
@@ -17,6 +15,8 @@ pipeline {
                  description: 'Parameter to know if wanna generate report.',
                  name: 'GENERATE_REPORT'
     }
+    environment {
+        projectName = "dvwa"
 
 stages {
     
