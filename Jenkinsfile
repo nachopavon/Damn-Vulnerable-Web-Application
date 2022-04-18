@@ -1,7 +1,7 @@
 pipeline {
     agent any
     environment {
-        projectName = "test-project"
+        projectName = "dvwa"
     }
 
 stages {
@@ -13,8 +13,8 @@ stages {
                  -Dsonar.projectKey=${projectName} \
                  -Dsonar.sources=. \
                  -Dsonar.host.url=${env.SONAR_HOST_URL} \
-                 -Dsonar.login="admin" \
-                 -Dsonar.password="password" \
+                 -Dsonar.login=admin \
+                 -Dsonar.password=adminadmin \
                  -Dsonar.projectName=${projectName} \
                  -Dsonar.projectVersion=${env.BUILD_ID}"
            }
