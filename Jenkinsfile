@@ -11,9 +11,9 @@ stages {
     }
     steps {
         withSonarQubeEnv('sonarqube') {
-            sh "${scannerHome}/bin/sonar-scanner" \
-                 -Dsonar.login="admin" \
-                 -Dsonar.password="adminadmin" \
+            sh "${scannerHome}/bin/sonar-scanner \
+                 -Dsonar.login="dmin \
+                 -Dsonar.password=adminadmin"
         }
         timeout(time: 10, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: true
