@@ -14,8 +14,7 @@ stages {
             sh "${scannerHome}/bin/sonar-scanner \
                  -Dsonar.projectKey=dvwa \
                  -Dsonar.projectName=DVWA \
-                 -Dsonar.login=admin \
-                 -Dsonar.password=adminadmin"
+                 -Dsonar.login=$SONAR_AUTH_TOKEN"
         }
         timeout(time: 10, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: false
