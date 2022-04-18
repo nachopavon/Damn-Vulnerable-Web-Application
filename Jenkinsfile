@@ -12,6 +12,7 @@ stages {
     steps {
         withSonarQubeEnv('sonarqube') {
             sh "${scannerHome}/bin/sonar-scanner \
+                 -Dsonar.projectKey=$PROJECT_NAME \
                  -Dsonar.login=admin \
                  -Dsonar.password=adminadmin"
         }
