@@ -1,5 +1,3 @@
-def scan_type
- def target
 pipeline {
     agent any
     environment {
@@ -19,9 +17,8 @@ stages {
         }
         timeout(time: 10, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: false
+                }
             }
         }
     }
-}
-    
 }
