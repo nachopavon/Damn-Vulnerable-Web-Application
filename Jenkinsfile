@@ -2,6 +2,7 @@ pipeline {
     agent any
     environment {
         projectName = "dvwa"
+    }
 
 stages {
     stage('Sonarqube') {
@@ -17,9 +18,8 @@ stages {
         }
         timeout(time: 10, unit: 'MINUTES') {
             waitForQualityGate abortPipeline: false
-                    }
-                }
             }
         }
     }
+}
 }
