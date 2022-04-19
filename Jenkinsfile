@@ -5,21 +5,14 @@ pipeline {
     }
 
 stages {
-    stage('Sonarqube') {
-    environment {
-        scannerHome = tool 'sonarqube'
-    }
-    steps {
-        withSonarQubeEnv('sonarqube') {
-            sh "${scannerHome}/bin/sonar-scanner \
-                 -Dsonar.projectKey=dvwa \
-                 -Dsonar.projectName=DVWA \
-                 -Dsonar.login=$SONAR_AUTH_TOKEN"
+    stage('SonarQube analysis') {
+      steps {
+        script {
+          def scannerHome = tool 'sonarqube';
+          withSonarQubeEnv('sonarqube') {
+            sh "${tool("sonarscan ")}/bin/sonar-scanner -Dsonar.projectKey=dvwa -Dsonar.projectName=DVWA"
+          }
         }
-        timeout(time: 10, unit: 'MINUTES') {
-            waitForQualityGate abortPipeline: false
-            }
-        }
+      }
     }
-}
 }
