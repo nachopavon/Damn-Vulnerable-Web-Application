@@ -13,7 +13,7 @@ pipeline {
       }
     }
 
-    stage('Quality Gate') {
+    stage('') {
       steps {
         waitForQualityGate true
       }
@@ -21,6 +21,6 @@ pipeline {
 
   }
   environment {
-    projectName = 'dvwa'
+    sonarqube = 'sonarqube'
   }
 }
