@@ -1,10 +1,6 @@
 pipeline {
-    agent any
-    environment {
-        projectName = "dvwa"
-    }
-
-stages {
+  agent any
+  stages {
     stage('SonarQube analysis') {
       steps {
         script {
@@ -13,7 +9,18 @@ stages {
             sh "${tool("sonarqube")}/bin/sonar-scanner -Dsonar.projectKey=dvwa -Dsonar.projectName=DVWA"
           }
         }
+
       }
     }
+
+    stage('') {
+      steps {
+        waitForQualityGate true
+      }
+    }
+
+  }
+  environment {
+    projectName = 'dvwa'
   }
 }
